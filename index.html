@@ -1,73 +1,608 @@
 <!DOCTYPE html>
-<html>
+<html lang="no">
 <head>
-<title>AI Trading Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Trading Terminal v2</title>
+  <style>
+    :root{
+      --bg:#081225;
+      --panel:#0f1b33;
+      --panel-2:#13223f;
+      --muted:#8ea3c7;
+      --text:#f5f7fb;
+      --green:#22c55e;
+      --amber:#f59e0b;
+      --red:#ef4444;
+      --blue:#60a5fa;
+      --border:#1f335d;
+    }
 
-<style>
+    *{box-sizing:border-box}
 
-body{
-background:#0f172a;
-color:white;
-font-family:Arial;
-padding:40px;
-}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,#07111f 0%, #0a1830 100%);
+      color:var(--text);
+      font-family:Arial, Helvetica, sans-serif;
+      padding:20px;
+    }
 
-.card{
-background:#1e293b;
-padding:20px;
-margin-top:20px;
-border-radius:10px;
-}
+    .container{
+      max-width:1280px;
+      margin:0 auto;
+    }
 
-.buy{color:#22c55e}
-.watch{color:#f59e0b}
-.sell{color:#ef4444}
+    .hero{
+      background:linear-gradient(135deg,#102141 0%, #0b1730 100%);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:24px;
+      margin-bottom:18px;
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+    }
 
-</style>
+    .hero-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    h1{
+      margin:0 0 8px;
+      font-size:38px;
+      line-height:1.1;
+    }
+
+    .sub{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.5;
+    }
+
+    .pill{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#12264a;
+      border:1px solid var(--border);
+      color:#d6e2ff;
+      font-size:13px;
+      margin-bottom:12px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:14px;
+      margin:18px 0 22px;
+    }
+
+    .stat{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:16px;
+    }
+
+    .stat-label{
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:8px;
+    }
+
+    .stat-value{
+      font-size:28px;
+      font-weight:700;
+    }
+
+    .toolbar{
+      display:grid;
+      grid-template-columns:1.2fr 180px 180px 180px;
+      gap:12px;
+      margin-bottom:18px;
+    }
+
+    .input, .select, .button{
+      width:100%;
+      background:var(--panel);
+      color:var(--text);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px 14px;
+      font-size:14px;
+      outline:none;
+    }
+
+    .button{
+      cursor:pointer;
+      background:linear-gradient(135deg,#183566 0%, #12264a 100%);
+      font-weight:700;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:2fr 1fr;
+      gap:18px;
+    }
+
+    .panel{
+      background:rgba(15,27,51,.92);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 10px 30px rgba(0,0,0,.18);
+    }
+
+    .panel h2{
+      margin:0 0 6px;
+      font-size:22px;
+    }
+
+    .panel-sub{
+      color:var(--muted);
+      font-size:14px;
+      margin-bottom:14px;
+    }
+
+    .card{
+      background:var(--panel-2);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:18px;
+      margin-top:14px;
+    }
+
+    .topline{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .symbol{
+      margin:0;
+      font-size:24px;
+      font-weight:700;
+    }
+
+    .badge{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:12px;
+      letter-spacing:.3px;
+      margin-top:8px;
+    }
+
+    .buy{background:rgba(34,197,94,.12); color:var(--green); border:1px solid rgba(34,197,94,.3);}
+    .watch{background:rgba(245,158,11,.12); color:var(--amber); border:1px solid rgba(245,158,11,.3);}
+    .hold{background:rgba(148,163,184,.12); color:#cbd5e1; border:1px solid rgba(148,163,184,.25);}
+    .sell{background:rgba(239,68,68,.12); color:var(--red); border:1px solid rgba(239,68,68,.25);}
+
+    .meta{
+      color:var(--muted);
+      font-size:13px;
+      margin-top:4px;
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .box{
+      background:#0b1730;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:12px;
+    }
+
+    .label{
+      color:var(--muted);
+      font-size:12px;
+      margin-bottom:6px;
+    }
+
+    .value{
+      font-size:18px;
+      font-weight:700;
+    }
+
+    .comment{
+      margin-top:14px;
+      color:#e5edf9;
+      line-height:1.5;
+      font-size:14px;
+    }
+
+    .mini-list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .mini-item{
+      background:var(--panel-2);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px;
+    }
+
+    .mini-top{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:center;
+    }
+
+    .mini-symbol{
+      font-weight:700;
+      font-size:16px;
+    }
+
+    .small{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:6px;
+    }
+
+    .fav-btn{
+      background:#0b1730;
+      border:1px solid var(--border);
+      color:#dbe7ff;
+      padding:8px 10px;
+      border-radius:10px;
+      cursor:pointer;
+      font-size:12px;
+      margin-top:10px;
+    }
+
+    .empty{
+      padding:30px;
+      text-align:center;
+      color:var(--muted);
+      border:1px dashed var(--border);
+      border-radius:16px;
+      margin-top:14px;
+    }
+
+    .footer-note{
+      color:var(--muted);
+      font-size:12px;
+      margin-top:14px;
+      line-height:1.5;
+    }
+
+    @media (max-width: 980px){
+      .layout{
+        grid-template-columns:1fr;
+      }
+
+      .toolbar{
+        grid-template-columns:1fr;
+      }
+
+      h1{
+        font-size:30px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="container">
+    <div class="hero">
+      <div class="hero-top">
+        <div>
+          <div class="pill">📈 AI Trading Terminal v2 · Oslo Børs scanner</div>
+          <h1>AI Aksjehandel Dashboard</h1>
+          <div class="sub" id="updatedText">Laster signaler...</div>
+        </div>
+        <button class="button" onclick="reloadDashboard()">Oppdater dashboard</button>
+      </div>
 
-<h1>📈 AI Trading Dashboard</h1>
+      <div class="grid" id="summaryGrid"></div>
 
-<div id="signals"></div>
+      <div class="toolbar">
+        <input id="searchInput" class="input" placeholder="Søk etter ticker, f.eks. KOG, EQNR, DNB..." />
+        <select id="signalFilter" class="select">
+          <option value="ALL">Alle signaler</option>
+          <option value="BUY">BUY</option>
+          <option value="WATCH">WATCH</option>
+          <option value="HOLD">HOLD</option>
+          <option value="SELL">SELL</option>
+        </select>
+        <select id="sortBy" class="select">
+          <option value="score">Sorter: Score</option>
+          <option value="rr">Sorter: Risk/Reward</option>
+          <option value="rsi">Sorter: RSI</option>
+        </select>
+        <select id="viewMode" class="select">
+          <option value="all">Vis alle</option>
+          <option value="top10">Kun Top 10</option>
+          <option value="favorites">Kun favoritter</option>
+        </select>
+      </div>
+    </div>
 
-<script>
+    <div class="layout">
+      <div class="panel">
+        <h2>Signalterminal</h2>
+        <div class="panel-sub">Entry, stop, target, RSI, volum og foreslått størrelse.</div>
+        <div id="signals"></div>
+      </div>
 
-fetch('signals.json')
-.then(res=>res.json())
-.then(data=>{
+      <div class="panel">
+        <h2>Toppoppsett</h2>
+        <div class="panel-sub">De sterkeste aksjene akkurat nå.</div>
+        <div class="mini-list" id="topList"></div>
 
-let container = document.getElementById("signals")
+        <div style="height:18px"></div>
 
-data.forEach(stock=>{
+        <h2>Favoritter</h2>
+        <div class="panel-sub">Lag din egen watchlist i nettleseren.</div>
+        <div class="mini-list" id="favoritesList"></div>
 
-let color = "watch"
+        <div class="footer-note">
+          Terminalen lagrer favoritter lokalt i browseren din. Scanneren henter data fra GitHub-filen <code>signals.json</code>.
+        </div>
+      </div>
+    </div>
+  </div>
 
-if(stock.signal==="BUY") color="buy"
-if(stock.signal==="SELL") color="sell"
+  <script>
+    let ALL_SIGNALS = [];
+    let SUMMARY = {};
+    let FAVORITES = JSON.parse(localStorage.getItem("ai-favorites") || "[]");
 
-container.innerHTML += `
-<div class="card">
+    function saveFavorites() {
+      localStorage.setItem("ai-favorites", JSON.stringify(FAVORITES));
+    }
 
-<h2>${stock.symbol}</h2>
+    function toggleFavorite(symbol) {
+      if (FAVORITES.includes(symbol)) {
+        FAVORITES = FAVORITES.filter(x => x !== symbol);
+      } else {
+        FAVORITES.push(symbol);
+      }
+      saveFavorites();
+      renderDashboard();
+    }
 
-<p class="${color}">
-Signal: ${stock.signal}
-</p>
+    function signalClass(signal) {
+      if (signal === "BUY") return "buy";
+      if (signal === "WATCH") return "watch";
+      if (signal === "SELL") return "sell";
+      return "hold";
+    }
 
-<p>Entry: ${stock.entry}</p>
-<p>Stop: ${stock.stop}</p>
-<p>Target: ${stock.target}</p>
+    function safe(value, fallback = "-") {
+      return value === undefined || value === null || value === "" ? fallback : value;
+    }
 
-</div>
-`
+    function renderSummary() {
+      const buyCount = ALL_SIGNALS.filter(x => x.signal === "BUY").length;
+      const watchCount = ALL_SIGNALS.filter(x => x.signal === "WATCH").length;
+      const avgScore = ALL_SIGNALS.length
+        ? (ALL_SIGNALS.reduce((sum, x) => sum + (Number(x.score) || 0), 0) / ALL_SIGNALS.length).toFixed(1)
+        : "0.0";
 
-})
+      document.getElementById("summaryGrid").innerHTML = `
+        <div class="stat">
+          <div class="stat-label">Antall signaler</div>
+          <div class="stat-value">${safe(SUMMARY.count, ALL_SIGNALS.length)}</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">BUY</div>
+          <div class="stat-value">${buyCount}</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">WATCH</div>
+          <div class="stat-value">${watchCount}</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Snittscore</div>
+          <div class="stat-value">${avgScore}</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Startkapital</div>
+          <div class="stat-value">20 000 kr</div>
+        </div>
+      `;
+    }
 
-})
+    function getFilteredSignals() {
+      const search = document.getElementById("searchInput").value.trim().toUpperCase();
+      const signalFilter = document.getElementById("signalFilter").value;
+      const sortBy = document.getElementById("sortBy").value;
+      const viewMode = document.getElementById("viewMode").value;
 
-</script>
+      let rows = [...ALL_SIGNALS];
 
+      if (search) {
+        rows = rows.filter(x => (x.symbol || "").toUpperCase().includes(search));
+      }
+
+      if (signalFilter !== "ALL") {
+        rows = rows.filter(x => x.signal === signalFilter);
+      }
+
+      if (viewMode === "favorites") {
+        rows = rows.filter(x => FAVORITES.includes(x.symbol));
+      }
+
+      rows.sort((a, b) => {
+        if (sortBy === "rr") return (Number(b.rr) || 0) - (Number(a.rr) || 0);
+        if (sortBy === "rsi") return (Number(b.rsi) || 0) - (Number(a.rsi) || 0);
+        return (Number(b.score) || 0) - (Number(a.score) || 0);
+      });
+
+      if (viewMode === "top10") {
+        rows = rows.slice(0, 10);
+      }
+
+      return rows;
+    }
+
+    function renderSignals() {
+      const rows = getFilteredSignals();
+      const container = document.getElementById("signals");
+
+      if (!rows.length) {
+        container.innerHTML = `<div class="empty">Ingen signaler matcher filtrene dine.</div>`;
+        return;
+      }
+
+      container.innerHTML = rows.map(stock => `
+        <div class="card">
+          <div class="topline">
+            <div>
+              <p class="symbol">${safe(stock.symbol)}</p>
+              <span class="badge ${signalClass(stock.signal)}">${safe(stock.signal)}</span>
+              <div class="meta">Score: ${safe(stock.score)} · R/R: ${safe(stock.rr)} · 20d: ${safe(stock.change20d, "-")}%</div>
+            </div>
+            <div>
+              <button class="fav-btn" onclick="toggleFavorite('${stock.symbol}')">
+                ${FAVORITES.includes(stock.symbol) ? "★ Fjern favoritt" : "☆ Legg til favoritt"}
+              </button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="box">
+              <div class="label">Entry</div>
+              <div class="value">${safe(stock.entry)}</div>
+            </div>
+            <div class="box">
+              <div class="label">Stop</div>
+              <div class="value">${safe(stock.stop)}</div>
+            </div>
+            <div class="box">
+              <div class="label">Target</div>
+              <div class="value">${safe(stock.target)}</div>
+            </div>
+            <div class="box">
+              <div class="label">RSI</div>
+              <div class="value">${safe(stock.rsi)}</div>
+            </div>
+            <div class="box">
+              <div class="label">Volum</div>
+              <div class="value">${safe(stock.volumeRatio, "-")}x</div>
+            </div>
+            <div class="box">
+              <div class="label">Størrelse</div>
+              <div class="value">${safe(stock.positionShares, 0)} stk</div>
+            </div>
+            <div class="box">
+              <div class="label">Posisjonsverdi</div>
+              <div class="value">${safe(stock.positionValue, 0)}</div>
+            </div>
+            <div class="box">
+              <div class="label">Nordnet-klart</div>
+              <div class="value">${safe(stock.signal)} / ${safe(stock.entry)}</div>
+            </div>
+          </div>
+
+          <div class="comment">${safe(stock.comment, "Ingen kommentar tilgjengelig.")}</div>
+        </div>
+      `).join("");
+    }
+
+    function renderTopList() {
+      const top = [...ALL_SIGNALS]
+        .sort((a, b) => (Number(b.score) || 0) - (Number(a.score) || 0))
+        .slice(0, 5);
+
+      document.getElementById("topList").innerHTML = top.length
+        ? top.map(stock => `
+          <div class="mini-item">
+            <div class="mini-top">
+              <div class="mini-symbol">${stock.symbol}</div>
+              <span class="badge ${signalClass(stock.signal)}">${stock.signal}</span>
+            </div>
+            <div class="small">Score: ${safe(stock.score)} · Entry: ${safe(stock.entry)} · Target: ${safe(stock.target)}</div>
+          </div>
+        `).join("")
+        : `<div class="empty">Ingen toppoppsett funnet.</div>`;
+    }
+
+    function renderFavorites() {
+      const rows = ALL_SIGNALS.filter(x => FAVORITES.includes(x.symbol));
+
+      document.getElementById("favoritesList").innerHTML = rows.length
+        ? rows.map(stock => `
+          <div class="mini-item">
+            <div class="mini-top">
+              <div class="mini-symbol">${stock.symbol}</div>
+              <span class="badge ${signalClass(stock.signal)}">${stock.signal}</span>
+            </div>
+            <div class="small">Entry: ${safe(stock.entry)} · Stop: ${safe(stock.stop)} · Score: ${safe(stock.score)}</div>
+          </div>
+        `).join("")
+        : `<div class="empty">Ingen favoritter enda.</div>`;
+    }
+
+    function renderDashboard() {
+      renderSummary();
+      renderSignals();
+      renderTopList();
+      renderFavorites();
+    }
+
+    async function loadDashboard() {
+      try {
+        const [summaryRes, signalsRes] = await Promise.all([
+          fetch("summary.json?" + Date.now()),
+          fetch("signals.json?" + Date.now())
+        ]);
+
+        SUMMARY = await summaryRes.json();
+        ALL_SIGNALS = await signalsRes.json();
+
+        document.getElementById("updatedText").innerText =
+          "Sist oppdatert: " + new Date(SUMMARY.updatedAt).toLocaleString("no-NO");
+
+        renderDashboard();
+      } catch (err) {
+        document.getElementById("updatedText").innerText = "Kunne ikke laste data.";
+        document.getElementById("signals").innerHTML =
+          `<div class="empty">Kunne ikke laste signals.json / summary.json.</div>`;
+        console.error(err);
+      }
+    }
+
+    function reloadDashboard() {
+      loadDashboard();
+    }
+
+    document.addEventListener("input", function(e) {
+      if (
+        e.target.id === "searchInput" ||
+        e.target.id === "signalFilter" ||
+        e.target.id === "sortBy" ||
+        e.target.id === "viewMode"
+      ) {
+        renderDashboard();
+      }
+    });
+
+    document.addEventListener("change", function(e) {
+      if (
+        e.target.id === "signalFilter" ||
+        e.target.id === "sortBy" ||
+        e.target.id === "viewMode"
+      ) {
+        renderDashboard();
+      }
+    });
+
+    loadDashboard();
+  </script>
 </body>
 </html>
