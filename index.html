@@ -1,59 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AI Aksjehandel Dashboard</title>
-  <style>
-    body{
-      font-family: Arial;
-      background:#0f172a;
-      color:white;
-      padding:40px;
-    }
+<title>AI Trading Dashboard</title>
 
-    h1{
-      font-size:32px;
-    }
+<style>
 
-    .card{
-      background:#1e293b;
-      padding:20px;
-      border-radius:10px;
-      margin-top:20px;
-    }
+body{
+background:#0f172a;
+color:white;
+font-family:Arial;
+padding:40px;
+}
 
-    .buy{color:#22c55e}
-    .watch{color:#f59e0b}
-    .sell{color:#ef4444}
-  </style>
+.card{
+background:#1e293b;
+padding:20px;
+margin-top:20px;
+border-radius:10px;
+}
+
+.buy{color:#22c55e}
+.watch{color:#f59e0b}
+.sell{color:#ef4444}
+
+</style>
 </head>
 
 <body>
 
 <h1>📈 AI Trading Dashboard</h1>
 
-<div class="card">
-<h2>KOG.OL</h2>
-<p class="buy">Signal: BUY</p>
-<p>Entry: 1284</p>
-<p>Stop: 1228</p>
-<p>Target: 1396</p>
-</div>
+<div id="signals"></div>
 
-<div class="card">
-<h2>EQNR.OL</h2>
-<p class="watch">Signal: WATCH</p>
-<p>Entry: 281</p>
-<p>Stop: 269</p>
-<p>Target: 305</p>
-</div>
+<script>
 
+fetch('signals.json')
+.then(res=>res.json())
+.then(data=>{
+
+let container = document.getElementById("signals")
+
+data.forEach(stock=>{
+
+let color = "watch"
+
+if(stock.signal==="BUY") color="buy"
+if(stock.signal==="SELL") color="sell"
+
+container.innerHTML += `
 <div class="card">
-<h2>TSLA</h2>
-<p class="sell">Signal: SELL</p>
-<p>Entry: 182</p>
-<p>Stop: 190</p>
-<p>Target: 165</p>
+
+<h2>${stock.symbol}</h2>
+
+<p class="${color}">
+Signal: ${stock.signal}
+</p>
+
+<p>Entry: ${stock.entry}</p>
+<p>Stop: ${stock.stop}</p>
+<p>Target: ${stock.target}</p>
+
 </div>
+`
+
+})
+
+})
+
+</script>
 
 </body>
 </html>
