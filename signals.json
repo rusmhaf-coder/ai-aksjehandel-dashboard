@@ -1,0 +1,23 @@
+[
+  {
+    "symbol": "KOG.OL",
+    "signal": "BUY",
+    "entry": 1284,
+    "stop": 1228,
+    "target": 1396
+  },
+  {
+    "symbol": "EQNR.OL",
+    "signal": "WATCH",
+    "entry": 281,
+    "stop": 269,
+    "target": 305
+  },
+  {
+    "symbol": "TSLA",
+    "signal": "SELL",
+    "entry": 182,
+    "stop": 190,
+    "target": 165
+  }
+]
