@@ -558,8 +558,8 @@
     async function loadDashboard() {
       try {
         const [summaryRes, signalsRes] = await Promise.all([
-          fetch("summary.json")
-          fetch("fetch("https://raw.githubusercontent.com/rusmhaf-coder/ai-aksjehandel-dashboard/main/signals.json"))
+          fetch("https://raw.githubusercontent.com/rusmhaf-coder/ai-aksjehandel-dashboard/main/signals.json")
+          fetch("https://raw.githubusercontent.com/rusmhaf-coder/ai-aksjehandel-dashboard/main/signals.json")
         ]);
 
         SUMMARY = await summaryRes.json();
