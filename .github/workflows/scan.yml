@@ -28,7 +28,7 @@ jobs:
         run: |
           python scan_oslo.py
 
-      - name: Commit updated signals
+     - name: Commit updated signals
   run: |
     git config user.name "github-actions"
     git config user.email "actions@github.com"
@@ -38,4 +38,5 @@ jobs:
     git commit -m "update signals" || echo "no change"
 
     git pull --rebase origin main
+    git push
     git push
