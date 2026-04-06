@@ -13,7 +13,7 @@
     "positionShares": 9,
     "positionValue": 2738.7,
     "comment": "DNB.OL: sterk trend, RSI 62.6, normalt volum, nær breakout.",
-    "scanDate": "2026-04-03T08:37:10.052771Z"
+    "scanDate": "2026-04-06T09:55:44.907500Z"
   },
   {
     "symbol": "SB1NO.OL",
@@ -29,7 +29,7 @@
     "positionShares": 14,
     "positionValue": 2947.0,
     "comment": "SB1NO.OL: sterk trend, RSI 57.6, normalt volum, nær breakout.",
-    "scanDate": "2026-04-03T08:37:16.656808Z"
+    "scanDate": "2026-04-06T09:55:51.295771Z"
   },
   {
     "symbol": "NHY.OL",
@@ -45,7 +45,7 @@
     "positionShares": 19,
     "positionValue": 1949.4,
     "comment": "NHY.OL: sterk trend, RSI 69.4, normalt volum, nær breakout.",
-    "scanDate": "2026-04-03T08:37:10.602762Z"
+    "scanDate": "2026-04-06T09:55:45.398877Z"
   },
   {
     "symbol": "KOG.OL",
@@ -61,7 +61,7 @@
     "positionShares": 4,
     "positionValue": 1675.4,
     "comment": "KOG.OL: sterk trend, RSI 61.6, normalt volum, under breakout-nivå.",
-    "scanDate": "2026-04-03T08:37:10.242357Z"
+    "scanDate": "2026-04-06T09:55:45.086559Z"
   },
   {
     "symbol": "AKRBP.OL",
@@ -77,7 +77,7 @@
     "positionShares": 5,
     "positionValue": 1701.0,
     "comment": "AKRBP.OL: sterk trend, RSI 55.9, normalt volum, under breakout-nivå.",
-    "scanDate": "2026-04-03T08:37:10.408137Z"
+    "scanDate": "2026-04-06T09:55:45.217201Z"
   },
   {
     "symbol": "YAR.OL",
@@ -93,7 +93,7 @@
     "positionShares": 3,
     "positionValue": 1683.0,
     "comment": "YAR.OL: sterk trend, RSI 64.8, normalt volum, under breakout-nivå.",
-    "scanDate": "2026-04-03T08:37:11.140691Z"
+    "scanDate": "2026-04-06T09:55:45.955018Z"
   },
   {
     "symbol": "WAWI.OL",
@@ -109,7 +109,7 @@
     "positionShares": 15,
     "positionValue": 1884.0,
     "comment": "WAWI.OL: sterk trend, RSI 55.4, normalt volum, under breakout-nivå.",
-    "scanDate": "2026-04-03T08:37:11.284738Z"
+    "scanDate": "2026-04-06T09:55:46.107695Z"
   },
   {
     "symbol": "FRO.OL",
@@ -125,7 +125,7 @@
     "positionShares": 5,
     "positionValue": 1696.5,
     "comment": "FRO.OL: sterk trend, RSI 58.5, normalt volum, under breakout-nivå.",
-    "scanDate": "2026-04-03T08:37:11.491096Z"
+    "scanDate": "2026-04-06T09:55:46.297181Z"
   },
   {
     "symbol": "BWE.OL",
@@ -141,7 +141,7 @@
     "positionShares": 34,
     "positionValue": 1982.2,
     "comment": "BWE.OL: sterk trend, RSI 58.9, normalt volum, under breakout-nivå.",
-    "scanDate": "2026-04-03T08:37:13.028766Z"
+    "scanDate": "2026-04-06T09:55:47.601081Z"
   },
   {
     "symbol": "ODL.OL",
@@ -157,7 +157,7 @@
     "positionShares": 24,
     "positionValue": 2433.6,
     "comment": "ODL.OL: sterk trend, RSI 54.2, normalt volum, under breakout-nivå.",
-    "scanDate": "2026-04-03T08:37:13.924299Z"
+    "scanDate": "2026-04-06T09:55:48.513425Z"
   },
   {
     "symbol": "MPCC.OL",
@@ -173,7 +173,7 @@
     "positionShares": 116,
     "positionValue": 2657.56,
     "comment": "MPCC.OL: sterk trend, RSI 56.6, normalt volum, under breakout-nivå.",
-    "scanDate": "2026-04-03T08:37:16.513041Z"
+    "scanDate": "2026-04-06T09:55:51.154106Z"
   },
   {
     "symbol": "SUBC.OL",
@@ -189,7 +189,7 @@
     "positionShares": 6,
     "positionValue": 1759.2,
     "comment": "SUBC.OL: sterk trend, RSI 69.8, sterkt volum, under breakout-nivå.",
-    "scanDate": "2026-04-03T08:37:12.317704Z"
+    "scanDate": "2026-04-06T09:55:46.944548Z"
   },
   {
     "symbol": "SCATC.OL",
@@ -205,7 +205,7 @@
     "positionShares": 15,
     "positionValue": 1998.0,
     "comment": "SCATC.OL: sterk trend, RSI 74.8, normalt volum, nær breakout.",
-    "scanDate": "2026-04-03T08:37:16.398685Z"
+    "scanDate": "2026-04-06T09:55:51.017175Z"
   },
   {
     "symbol": "HAFNI.OL",
@@ -221,7 +221,7 @@
     "positionShares": 26,
     "positionValue": 1967.68,
     "comment": "HAFNI.OL: sterk trend, RSI 66.5, normalt volum, under breakout-nivå.",
-    "scanDate": "2026-04-03T08:37:16.917897Z"
+    "scanDate": "2026-04-06T09:55:51.539308Z"
   },
   {
     "symbol": "TEL.OL",
@@ -237,6 +237,6 @@
     "positionShares": 21,
     "positionValue": 3576.3,
     "comment": "TEL.OL: sterk trend, RSI 54.5, normalt volum, under breakout-nivå.",
-    "scanDate": "2026-04-03T08:37:11.817692Z"
+    "scanDate": "2026-04-06T09:55:46.604789Z"
   }
 ]
